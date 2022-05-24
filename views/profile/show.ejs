@@ -1,0 +1,96 @@
+<%- include("../patials/header.ejs") %>
+<div class="profile-container">
+    <div class="profile-container__info">
+        <div class="profile-container__info__profile-picture">
+            <img src="<%= user.userImage %>">
+        </div>
+        <div class="profile-container__info__text">
+            <div class="profile-container__info__text__display-name">
+                <span><%= user.displayName %></span>
+            </div>
+            <div></div>
+            <div class="profile-container__info__text__menu">
+                <% if(currentUser._id.equals(user._id)) { %>
+                    <a href="/profile/<%= currentUser._id %>/edit">
+                        <div class="profile-container__info__text__menu__element profile-container__info__text__button">
+                            <img src="/images/icons/edit-text.png">
+                            <span>Edit</span>
+                        </div>
+                    </a>
+                <% } else if(currentUser.role==="admin"&&currentUser._id!==user._id){%>
+                    <form action="/profile/<%= user._id %>?_method=delete" method="POST">
+                        <a onclick="this.parentNode.submit()">
+                            <div class="profile-container__info__text__menu__element profile-container__info__text__button profile-container__info__text__button--delete">
+                                <img src="/images/icons/bin.png">
+                                <span>Delete</span>
+                            </div>
+                        </a>
+                    </form>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="profile-container__following container-slider">
+        <div class="profile-container__following__topic container-slider__topic">
+            <span>Following</span>
+        </div>
+        <div class="profile-container__following__element-list container-slider__element-list swiper mySwiper">
+            <div class="swiper-wrapper">
+                <% user.following.forEach((artist) => { %>
+                    <div class="profile-container__following__element-list__artist container-slider__element-list__element swiper-slide">
+                        <span><%= artist.name %></span>
+                        <img class="container-slider__element-list__element__image" src="<%= artist.artistImage %>">
+                        <div class="container-slider__element-list__element__button blue-circle-button">
+                            <img src="/images/icons/search1.png">
+                        </div>
+                        <div class="container-slider__element-list__element__button-bg">
+
+                        </div>
+                        <a href="/artist/<%= artist._id %>">
+                            <div class="container-slider__element-list__element__link importance-z-index">
+
+                            </div>
+                        </a>
+                        <div class="container-slider__element-list__element__bg"></div>
+                    </div>
+                <% }) %> 
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+    <div class="profile-container__favorite container-slider">
+        <div class="profile-container__favorite__topic container-slider__topic">
+            <span>Favorite</span>
+        </div>
+        <div class="profile-container__favorite__element-list container-slider__element-list swiper mySwiper">
+            <div class="swiper-wrapper">
+                <% musics.forEach((music) => { %>
+                    <div class="profile-container__favorite__element-list__music container-slider__element-list__element swiper-slide">
+                        <span class="play-code__music-name" ><%= music.name %></span>
+                        <img class="container-slider__element-list__element__image play-code__music-cover-image" src="<%= music.imageCover %>">
+                        <div class="container-slider__element-list__element__button blue-circle-button play-code__play-button" 
+                        music-source="<%= music.musicSource %>">
+                            <img src="/images/icons/play-button.png">
+                        </div>
+                        <div class="container-slider__element-list__element__button-bg">
+
+                        </div>
+                        <a href="/music/<%= music._id %>">
+                            <div class="container-slider__element-list__element__link">
+
+                            </div>
+                        </a>
+                        <span class="play-code__artist" style="color: rgba(0,0,0,0);"><%= music.artist.name %></span>
+                        <div class="container-slider__element-list__element__bg"></div>
+                    </div>
+                <% }) %> 
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
+        </div>
+    </div>
+</div>
+<%- include("../patials/footer.ejs") %>

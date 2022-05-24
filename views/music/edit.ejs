@@ -1,0 +1,38 @@
+<%- include("../patials/header.ejs") %>
+
+<form action="/music/<%= music._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div class="form-container">
+        <div class="form-container__box form-container__box--left">
+            <div class="form-container__box__element">
+                <p>Music name</p>
+                <input type="text" name="music[name]" value="<%= music.name %>">
+            </div>
+            <div>
+                <p>Artist</p>
+                <input type="text" name="music[artist]" value="<%= music.artist.name %>">
+            </div>
+            <div>
+                <p>Release date</p>
+                <input type="date" name="music[release]" value="<%= music.release %>">
+            </div>
+            <div class="form-container__image">
+                <p>Image cover</p>
+                <input type="file" name="imageCover" accept="image/*">
+                <img src="<%= music.imageCover %>" width="150px">
+            </div>
+            <div class="form-container__music">
+                <p>Music file</p>
+                <audio controls>
+                    <source src="<%= music.musicSource %>">
+                </audio>
+                <input type="file" name="musicSource" accept=".mp3">
+            </div>
+            <p><input type="submit"></p>
+        </div>
+        <div class="form-container__box form-container__box--right">
+            <p>Lyrics</p>
+            <textarea type="text" name="music[lyrics]""><%= music.lyrics %></textarea>
+        </div>
+    </div>     
+</form>
+<%- include("../patials/footer.ejs") %>

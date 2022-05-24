@@ -1,0 +1,18 @@
+<%- include("../patials/header.ejs") %>
+<form action="/artist/<%= artist._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div class="form-container">
+        <div class="form-container__box form-container__box--left">
+            <div>
+                <p>Artist name</p>
+                <input type="text" name="artist[name]" placeholder="Enter artist name" value="<%= artist.name %>">
+            </div>
+            <div class="form-container__image">
+                <p>Artist image</p>
+                <input type="file" name="image" accept="image/*">
+                <img src="<%= artist.artistImage %>" width="150px">
+            </div>
+            <p><input type="submit"></p>
+        </div>
+    </div>
+</form>
+<%- include("../patials/footer.ejs") %>

@@ -1,0 +1,41 @@
+<%- include("patials/header.ejs") %>
+<form action="/deleteUser" method="POST">
+    <div class="form-container">
+        <div class="form-container__box form-container__box--left">
+            <div>
+                <p>User display name</p>
+                <input type="text" name="userDisplayName" placeholder="Enter user display name">
+            </div>
+            <p><input type="submit" value="search"></p>
+        </div>
+        <div class="form-container__box form-container__box--right">
+            <div class="show-user-list">
+                <% if(users!==false) { %>
+                    <% users.forEach(function(user){ %>
+                        <% if(user.role!=="admin") { %>
+                            <div class="show-user-list__element">
+                                <div class="show-user-list__element__image">
+                                    <img src="<%= user.userImage %>">
+                                </div>
+                                <div class="show-user-list__element__name">
+                                    <div class="show-user-list__element__name__display show-user-list__element__name__element">
+                                        <span>Display name : <%= user.displayName %></span>
+                                    </div>
+                                    <div class="show-user-list__element__name__username show-user-list__element__name__element">
+                                        <span>Username : <%= user.username %></span>
+                                    </div>
+                                </div>
+                                <a href="/profile/<%= user._id %>">
+                                    <div class="show-user-list__element__button">
+
+                                    </div>
+                                </a>
+                            </div>
+                        <% } %>
+                    <% }); %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</form>
+<%- include("patials/footer.ejs") %>

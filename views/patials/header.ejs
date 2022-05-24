@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Melodian</title>
+    <link rel="stylesheet" href="/stylesheets/main.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+    <script src="/scripts/navbar-left.js" defer></script>
+</head>
+<body>
+    <nav class="display-zone--top nav-bar--top">
+        <div class="nav-bar--top__logo">
+            <p>Melodian</p>
+            <% if(currentUser && currentUser.role === "admin") { %>
+                <p class="nav-bar--top__logo__admin">manager</p>
+            <% } %>
+        </div>
+        <div class="nav-bar--top__search-bar">
+            <form action="/search" method="POST">
+                <input type="submit" value="">
+                <input type="text" name="searchKey" placeholder="Search you song here!">
+            </form>
+        </div>
+        <div class="nav-bar--top__button-list">
+            <% if(!currentUser) { %>
+                <a href="/login" class="nav-bar--top__button-list__button">
+                    <span>Login</span>
+                </a>
+                <a href="/register" class="nav-bar--top__button-list__button">
+                    <span>Register</span>
+                </a>
+            <% } else { %> 
+                <a href="/" class="nav-bar--top__button-list__button">
+                    <span><%= currentUser.displayName %></span>
+                </a>
+                <a href="/logout" class="nav-bar--top__button-list__button">
+                    <span>Logout</span>
+                </a>
+            <% } %>
+        </div>
+    </nav>
+    <nav class="display-zone--left nav-bar--left">
+        <div class="nav-bar--left__button-list">
+            <a href="/" class="nav-bar--left__button-list__button--highlight" id="home-button">
+                <img src="/images/icons/home.png" alt="home-icon">
+                <span>Home</span>
+            </a>
+            <% if(!currentUser || (currentUser && currentUser.role!=="admin")) { %>
+                <% if(!currentUser) { %>
+                    <a href="/profile/0" class="nav-bar--left__button-list__button">
+                        <img src="/images/icons/profile.png" alt="profile-icon">
+                        <span>Profile</span>
+                    </a>
+                <% } else { %>
+                    <a href="/profile/<%= currentUser._id %>" class="nav-bar--left__button-list__button" id="profile-button">
+                        <img src="/images/icons/profile.png" alt="profile-icon">
+                        <span>Profile</span>
+                    </a>
+                <% } %>
+                <a href="/" class="nav-bar--left__button-list__button">
+                    <img src="/images/icons/artist.png" alt="artist-icon">
+                    <span>Following</span>
+                </a>
+                <a href="/" class="nav-bar--left__button-list__button">
+                    <img src="/images/icons/history.png" alt="history-icon">
+                    <span>History</span>
+                </a>
+                <a href="/" class="nav-bar--left__button-list__button">
+                    <img src="/images/icons/playlist.png" alt="playlist-icon">
+                    <span>Playlist</span>
+                </a>
+                <a href="/" class="nav-bar--left__button-list__button">
+                    <img src="/images/icons/favorite.png" alt="favorite-icon">
+                    <span>Favorite</span>
+                </a>
+            <% } %>
+            <% if(currentUser && currentUser.role === "admin") { %>
+                <a href="/music/new" class="nav-bar--left__button-list__button" id="add-music-button">
+                    <img src="/images/icons/add_music.png" alt="add-music-icon">
+                    <span>Adding music</span>
+                </a>
+                <a href="/artist/new" class="nav-bar--left__button-list__button" id="add-artist-button">
+                    <img src="/images/icons/invite.png" alt="add-artist-icon">
+                    <span>Adding artist</span>
+                </a>
+                <a href="/deleteUser" class="nav-bar--left__button-list__button" id="delete-user-button">
+                    <img src="/images/icons/delete-user.png" alt="delete-user-icon">
+                    <span>Deleting user</span>
+                </a>
+            <% } %>
+        </div>
+    </nav>
+    <% if(error && error.length>0) { %>
+        <div class="alert-message alert-message--error" role="alert">
+            <%= error %>
+        </div>
+    <% } %>
+    <% if(success && success.length>0) { %>
+        <div class="alert-message alert-message--success" role="alert">
+            <%= success%>
+        </div>
+    <% } %>
+    <div class="display-zone--main">   

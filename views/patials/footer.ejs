@@ -1,0 +1,55 @@
+</div>
+<script src="/scripts/playMusic.js" defer></script>
+<div class="audio-controller">
+    <img class="audio-controller__cover-image" src="/images/icons/opacity.png">
+    <div class="audio-controller__info">
+        <p class="audio-controller__info__music-name"></p>
+        <p class="audio-controller__info__artist"></p>
+    </div>
+    <div class="audio-controller__controls">
+        <div class="audio-controller__controls__control-play">
+            <div class="audio-controller__controls__control-play__timeline">
+                <input class="audio-controller__controls__control-play__timeline__range range-bar" type="range" max="100" value="0" disabled>
+                <div class="audio-controller__controls__control-play__timeline__current-time">
+                    <span>0.00</span>
+                </div>
+                <div class="audio-controller__controls__control-play__timeline__remain-time">
+                    <span>0.00</span>
+                </div>
+            </div>
+            <div class="audio-controller__controls__control-play__button">
+                <div class="audio-controller__controls__control-play__button__element audio-controller__controls__control-play__button__play-button">
+                    <img class="audio-button" src="/images/icons/play-button.png">
+                </div>
+            </div>
+        </div>
+        <div class="audio-controller__controls__control-volume">
+            <div class="audio-controller__controls__control-volume__button">
+                <img class="audio-button" src="/images/icons/volume.png">
+            </div>
+            <div class="audio-controller__controls__control-volume__range">
+                <input type="range" class="audio-controller__controls__control-volume__range__range-bar range-bar" max="100" value="50">
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 6,
+        spaceBetween: 0,
+        slidesPerGroup: 6,
+        loop: true,
+        loopFillGroupWithBlank: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev"
+        }
+      });
+    </script>
+</body>
+</html>

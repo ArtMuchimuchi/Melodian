@@ -1,0 +1,37 @@
+<%- include("../patials/header.ejs") %>
+<form action="/music" method="POST" enctype="multipart/form-data">
+    <div class="form-container">
+        <div class="form-container__box form-container__box--left">
+            <div>
+                <p>Music name</p>
+                <input type="text" name="music[name]" placeholder="Enter music name">
+            </div>
+            <div>
+                <p>Artist</p>
+                <input type="text" name="music[artist]" placeholder="Enter artist name">
+            </div>
+            <div>
+                <p>Genre</p>
+                <input type="text" name="music[genre]" placeholder="Enter music genre">
+            </div>
+            <div>
+                <p>Release date</p>
+                <input type="date" name="music[release]" placeholder="Enter release date">
+            </div>
+            <div class="form-container__image">
+                <p>Image cover</p>
+                <input type="file" name="imageCover" accept="image/*">
+            </div>
+            <div class="form-container__music">
+                <p>Music file</p>
+                <input type="file" name="musicSource" accept=".mp3">
+            </div>
+            <p><input type="submit"></p>
+        </div>
+        <div class="form-container__box form-container__box--right">
+            <p>Lyrics</p>
+            <textarea type="text" name="music[lyrics]" placeholder="Enter the lyrics"></textarea>
+        </div>
+    </div>
+</form>
+<%- include("../patials/footer.ejs") %>

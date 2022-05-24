@@ -1,0 +1,27 @@
+<%- include("patials/header.ejs") %>
+</div>
+<div class="blue-background">
+    <div class="white-container">
+        <h1 class="white-container__logo">Melodian</h1>
+        <h2 class="white-container__topic">Login</h2>
+        <form action="/login" method="post">
+            <div class="white-container__form">
+                <label class="white-container__form__label">Username</label>
+                <input type="text" class="white-container__form__input-text" name="username" placeholder="Enter your username">
+            </div>
+            <div class="white-container__form">
+                <label class="white-container__form__label">Password</label>
+                <input type="password" class="white-container__form__input-text" name="password" placeholder="Enter your password">
+            </div>
+            <button type="submit" class="white-container__form__button">Login</button>
+        </form>
+        <div class="white-container__hidden">a</div>
+        <div class="white-container__separator">
+            <span>or</span>
+        </div>
+        <div class="white-container__hidden">a</div>
+        <span class="white-container__link">Never have an account? <a href="/register">REGISTER</a></span>
+        <a href="/" class="go-back">Back</a>
+    </div>
+
+<%- include("patials/footer.ejs") %>

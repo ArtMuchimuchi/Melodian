@@ -1,0 +1,83 @@
+<%- include("patials/header.ejs") %>
+<div class="display-music-header">
+    <div class="display-music-header__element display-music-header__picture">
+
+    </div>
+    <div class="display-music-header__element display-music-header__music-name">
+        <span>Name</span>
+    </div>
+    <div class="display-music-header__element display-music-header__artist">
+        <span>Artist</span>
+    </div>
+    <div class="display-music-header__element display-music-header__plays">
+        <span>Likes</span>
+    </div>
+    <div class="display-music-header__element display-music-header__length">
+        <span>Length</span>
+    </div>
+    <div class="display-music-header__element display-music-header__genre">
+        <span>Genre</span>
+    </div>
+    <div class="display-music-header__element display-music-header__play-button">
+        
+    </div>
+    <div class="display-music-header__element display-music-header__favorite">
+        
+    </div>
+</div>
+<div class="display-music-container">
+    <% musics.forEach(function(music) { %>
+        <div class="display-music-container__music">
+            <img class="display-music-container__music__element play-code__music-cover-image" src="<%= music.imageCover %>">
+            <div class="display-music-container__music__element display-music-container__music__name">
+                <span class="play-code__music-name"><%= music.name %></span>
+            </div>
+            <div class="display-music-container__music__element display-music-container__music__artist">
+                <span class="play-code__artist"><%= music.artist.name %></span>
+            </div>
+            <div class="display-music-container__music__element display-music-container__music__likes">
+                <span><%= music.likes %></span>
+            </div>
+            <div class="display-music-container__music__element display-music-container__music__length show-duration">
+                <span></span>
+            </div>
+            <div class="display-music-container__music__element display-music-container__music__genre">
+                <span><%= music.genre %></span>
+            </div>
+            <div class="display-music-container__music__element display-music-container__music__play-button blue-circle-button play-code__play-button" 
+            music-source="<%= music.musicSource %>">
+                <img src="/images/icons/play-button.png">
+            </div>
+            <% if(currentUser) { %>
+                <% if(currentUser.favorite.includes(music._id)) { %>
+                    <div class="display-music-container__music__element display-music-container__music__favorite blue-circle-button">
+                        <form action="/profile/<%= currentUser._id %>/favorite/remove" method="POST">
+                            <a onclick="this.parentNode.submit()">
+                                <img src="/images/icons/favorite.png">
+                            </a>
+                            <input type="hidden" name="musicID" value="<%= music._id %>">
+                        </form>
+                    </div>
+                <% } else { %>
+                    <div class="display-music-container__music__element display-music-container__music__favorite blue-circle-button white-filter">
+                        <form action="/profile/<%= currentUser._id %>/favorite/add" method="POST">
+                            <a onclick="this.parentNode.submit()">
+                                <img src="/images/icons/favorite.png">
+                            </a>
+                            <input type="hidden" name="musicID" value="<%= music._id %>">
+                        </form>
+                    </div>
+                <% } %>
+            <% } else {%>
+                <div class="display-music-container__music__element display-music-container__music__favorite blue-circle-button white-filter">
+                    <a href="/profile/0">
+                        <img src="/images/icons/favorite.png">
+                    </a>
+                </div>
+            <% } %>
+            <a href="/music/<%= music._id %>"></a>
+        </div>
+        
+    <% }); %>
+</div>
+<%- include("patials/footer.ejs") %>

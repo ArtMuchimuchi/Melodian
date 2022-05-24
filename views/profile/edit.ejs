@@ -1,0 +1,17 @@
+<%- include("../patials/header.ejs") %>
+<form class="profile-container--edit" action="/profile/<%= currentUser._id %>?_method=PUT" method="POST" enctype="multipart/form-data">
+    <div class="profile-container--edit__topic">
+        <span>Edit Profile</span>
+    </div>
+    <div class="profile-container--edit__name">
+        <span>Display Name</span>
+        <input type="text" name="user[displayName]" placeholder="<%= user.displayName %>" value="<%= user.displayName %>">
+    </div>
+    <div class="profile-container--edit__picture">
+        <span>Profile Picture</span>
+        <img src="<%= user.userImage %>">
+        <input type="file" name="userImage" accept="image/*">
+    </div>
+    <input class="profile-container--edit__button" type="submit">
+</form>
+<%- include("../patials/footer.ejs") %>
